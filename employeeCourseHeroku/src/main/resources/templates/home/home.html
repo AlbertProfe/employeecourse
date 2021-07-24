@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{home/layout}">
+
+<title>Welcome to our site</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+
+		<!-- sign out -->
+		<div class="w3-panel w3-teal w3-center w3-display-container">
+			<h1 th:inline="text">Hello
+				[[${#httpServletRequest.remoteUser}]]!</h1>
+			<form th:action="@{/logout}" method="post">
+				<input class="w3-button" type="submit" value="Sign Out" />
+			</form>
+
+		</div>
+
+		<!-- cards with direct ACCESS -->
+		<div class="w3-row-padding w3-center w3-margin-top">
+
+			<!-- filling -->
+			<div class="w3-third">
+				<div class="w3-container w3-card-4 w3-center">
+					<hr>
+					<p style="font-weight: bold">How many entities do you want to
+						create?</p>
+					<hr>
+
+					<a th:href="@{/fillinemployee(qtyToCreate=10)}"
+						class="w3-button w3-teal">Create 10 entities and registers in
+						BD</a>
+					<p></p>
+					<a th:href="@{/fillinemployee(qtyToCreate=100)}"
+						class="w3-button w3-teal">Create 100 entities and registers in
+						BD</a>
+					<p></p>
+					<a th:href="@{/fillinemployee(qtyToCreate=1000)}"
+						class="w3-button w3-teal">Create 1000 entities and registers
+						in BD</a>
+					<p></p>
+					<a th:href="@{/fillinemployee(qtyToCreate=5000)}"
+						class="w3-button w3-teal">Create 5000 entities and registers
+						in BD</a>
+					<p></p>
+					<a th:href="@{/fillinemployee(qtyToCreate=10000)}"
+						class="w3-button w3-teal">Create 10000 entities and registers
+						in BD</a>
+
+					
+					<hr>
+					<span>(1) employees/expenses/holidays/courses and
+						certificates</span><br> <span>(2) with the enrollments
+						employee-courses and employee-expenses (1 to 10)</span><br> <span>(3)
+						@onetomany and @manytomany relationships</span>
+					<hr>
+
+				</div>
+			</div>
+
+			<!-- micro-dashboard -->
+			<div class="w3-third">
+				<div class="w3-container w3-card-4 w3-center">
+				<hr>
+					<p style="font-weight: bold">Micro-dashboard</p>
+					<hr><br>
+				
+		
+					<p th:text="'Employees quantity at db: ' + ${employees} "></p>
+					<p th:text="'Expenses quantity at db: ' + ${expenses} "></p>
+					<p th:text="'Employees quantity at db: ' + ${certificates} "></p>
+					<p th:text="'Certificates quantity at db: ' + ${courses} "></p>
+					<p th:text="'Enrollments quantity at db: ' + ${enrollments} "></p>
+					<p th:text="'Holidays quantity at db: ' + ${holidays} "></p><br>
+				</div><br>
+				<div class="w3-container w3-card-4 w3-center">
+					<hr>
+					<p style="font-weight: bold">How many entities do you want to
+						delete?</p>
+					<hr>
+
+					
+					<p>Delete all entities and registers in BD</p>
+
+					<a th:href="@{/deleteAll}"
+						class="w3-button w3-red">Delete all entities and registers in
+						BD</a>
+					<p></p>
+					<p></p>
+					
+					<hr>
+
+				</div>
+			</div>
+			
+			<!-- links  -->
+			<div class="w3-third">
+				<div class="w3-container w3-card-4 w3-center">
+				<hr>
+					<p style="font-weight: bold">Api rest links</p>
+					<hr>
+						<p>Api Rest Contoller from h2</p>
+					<a th:href="@{/webapi/allEmployees}"
+						class="w3-button w3-blue">All employees</a><p></p>
+						
+						<a th:href="@{/webapi/getEmployee/1}"
+						class="w3-button w3-blue">Get employee #</a><p></p>
+						
+						<a th:href="@{/webapi/deleteEmployee/1}"
+						class="w3-button w3-red">Delete employee #</a><p></p>
+						
+						<p>Api Rest Contoller from mongodb</p>
+						<a th:href="@{/getAllEmployeeImages}"
+						class="w3-button w3-teal">All employees images</a><p></p>
+						
+						<a th:href="@{/getEmployeeImage/?id=60f7cb2d579562673d1eb417}"
+						class="w3-button w3-teal">Get employees image</a><p></p>
+						
+						<hr>
+				</div>
+			</div>
+		
+		</div>
+
+		<hr>
+
+		<!-- cards with INFO spring -->
+		<div class="w3-row-padding w3-center w3-margin-top">
+
+			<!-- cards with INFO spring: FRONT END -->
+			<div class="w3-card-12" style="width: 50%; margin: 0 auto;">
+				<div class="w3-card w3-container" style="min-height: 460px">
+					<h3>Front End</h3>
+					<br> <i class="fa fa-desktop w3-margin-bottom w3-text-theme"
+						style="font-size: 120px"></i>
+					<p>ThymeLeaf</p>
+					<p>HTML5</p>
+					<p>W3.css</p>
+					<p>JS</p>
+				</div>
+			</div>
+			
+			<hr>
+			
+			<!-- cards with INFO spring: BACK END -->
+			<div class="w3-card-12" style="width: 50%; margin: 0 auto;">
+				<div class="w3-card w3-container" style="min-height: 460px">
+					<h3>Back End</h3>
+					<br> <i class="fa fa-cog w3-margin-bottom w3-text-theme"
+						style="font-size: 120px"></i>
+					<p>Spring Boot Security</p>
+					<p>Controller and CrudRepository, MongoRepository</p>
+					<p>JPA</p>
+					<p>Security</p>
+					
+				</div>
+			</div>
+			
+			<hr>
+			
+			<!-- cards with INFO spring: DATA BASE -->
+			<div class="w3-card-12" style="width: 50%; margin: 0 auto;">
+				<div class="w3-card w3-container" style="min-height: 460px">
+					<h3>Data Base</h3>
+					<br> <i class="fa fa-database w3-margin-bottom w3-text-theme"
+						style="font-size: 120px"></i>
+					<p>H2 Local Server</p>
+					<p>H2 in memory</p>
+					<p>JPA @OneToMany @ManyToOne</p>
+					<p>MongoDB Binary Images and CrudRepository</p>
+				</div>
+			</div>
+			
+			<hr>
+			
+			<!-- cards with INFO spring: API REST -->
+			<div class="w3-card-12" style="width: 50%; margin: 0 auto;">
+				<div class="w3-card w3-container" style="min-height: 460px">
+					<h3>API REST and DEPLOY</h3>
+					<br> <i class="fa fa-cogs w3-margin-bottom w3-text-theme"
+						style="font-size: 120px"></i>
+					<p>Api Rest / Rest Template</p>
+					<p>Postman / Swagger</p>
+					<p>Deploy on Heroku</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

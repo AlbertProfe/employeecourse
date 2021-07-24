@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{home/layout}">
+<head>
+<title>Welcome to my Spring Boot Project</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<!-- Fragment -->
+	<div layout:fragment="content">
+
+		<!-- Script for tabs -->
+		<script>
+			function openItem(itememployeeName) {
+				var i;
+				var x = document.getElementsByClassName("itememployee");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";
+				}
+				document.getElementById(itememployeeName).style.display = "block";
+			}
+			/* function toggleShowHide() {
+				var x = document.getElementById("Dates");
+				if (x.className.indexOf("w3-show") == -1) {
+					x.className += " w3-show";
+				} else {
+					x.className = x.className.replace(" w3-show", "");
+				}
+			} */
+		</script>
+
+		<!-- Main div -->
+		<div class="w3-container w3-content"
+			style="max-width: 1600px; margin-top: 50px"
+			th:each="employee:${employeefromController}">
+
+			<!-- The Grid -->
+			<div class="w3-row">
+
+				<!-- Left Column Employee Detail-->
+				<div class="w3-col m4">
+					<div class="w3-row-padding">
+						<div class="w3-col m12">
+
+							<div class="w3-card-4">
+								<header class="w3-container w3-light-grey">
+									<h3
+										th:text="${employee.id} + ' ' +${employee.name} + ' ' + ${employee.surname}"></h3>
+
+								</header>
+								<div class="w3-container">
+									<p>Pending update Holidays and Expenses</p>
+									<p></p>
+									<hr>
+									<img
+										src="http://localhost:8086/getEmployeeImage/?id=60e7fc8c14a7dc49c4618462"
+										alt="Avatar" class="w3-left w3-circle w3-margin-right"
+										style="width: 60px">
+									<p th:text="${employee.job}"></p>
+									<p th:text="${employee.position}"></p>
+									<br>
+									<p th:text="${employee.address}"></p>
+									<p th:text="${employee.phoneNumber}"></p>
+									<p th:text="${employee.age}"></p>
+									<p th:text="${employee.email}"></p>
+
+									<p th:text="${employee.monthSalary}"></p>
+									<p th:text="${employee.password}"></p>
+									<hr>
+									<div class="w3-container w3-center">
+
+										<a th:href="@{~/employee/deleteEmployee(id=${employee.id})}"
+											class="w3-button w3-red w3-center">Delete</a> <a
+											th:href="@{~/employee/updateEmployee(id=${employee.id})}"
+											class="w3-button w3-blue">Update</a> <a
+											th:href="@{~/employee/items/addImageEmployee(id=${employee.id})}"
+											class="w3-button w3-blue-gray">+ Add Image</a>
+
+
+										<hr>
+									</div>
+
+								</div>
+								<a class="w3-button w3-block w3-dark-grey"
+									th:href="@{~/employee/allEmployees}"> All Employees</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- End Left Column -->
+
+				<!-- Right Column 3 Tabs: Course, Expense and Holidays-->
+				<div class="w3-col m8">
+
+					<!-- Employee Items  -->
+					<div class="w3-card-4">
+						<header class="w3-container w3-light-grey">
+							<h3>Employee Items</h3>
+						</header>
+
+						<!-- Button tabs  -->
+						<div class="w3-bar w3-blue-gray">
+							<button class="w3-bar-item w3-large w3-button"
+								onclick="openItem('Courses')">Courses</button>
+							<button class="w3-bar-item w3-large w3-button"
+								onclick="openItem('Expenses')">Expenses</button>
+							<button class="w3-bar-item w3-large w3-button"
+								onclick="openItem('Holidays')">Holidays</button>
+						</div>
+
+						<!-- Courses -->
+						<div id="Courses" class="w3-container itememployee">
+							<div th:if="${enrollmentfromController.isEmpty()}">
+								<p>There is no course added to this employee</p>
+							</div>
+							<div th:if="${!enrollmentfromController.isEmpty()}">
+								<p>There are some enrollments and courses (certificates)
+									from this employee in our DB</p>
+
+								<!-- Enrollments from Controller for THIS id employee -->
+								<div class="w3-container"
+									th:each="enroll:${enrollmentfromController}">
+									<ul id="coursesUL" class="w3-ul w3-card-4">
+										<li class="w3-bar"><span
+											onclick="this.parentElement.style.display='none'"
+											class="w3-bar-item w3-button w3-small w3-right">×</span> <img
+											src="http://localhost:8086/getEmployeeImage/?id=60f7cc2b579562673d1eb422"
+											class="w3-bar-item w3-circle w3-hide-small"
+											style="width: 105px">
+											<div class="w3-bar-item">
+
+												<span class="w3-large"
+													th:text="${'id enrollment: ENRO-C-'+ enroll.id}"></span><br>
+
+												<span th:text="${'status: '}"></span> <span
+													style="color: red" th:text="${enroll.status}"></span> <span
+													th:text="${' Approved: '+ enroll.approved + '  - Enrollment date: '+ enroll.enrollmentDate}"></span>
+												<br> <span style="font-weight: bold"
+													th:text="${'id course: '+ enroll.course.id}"></span><br>
+
+												<span
+													th:text="${enroll.course.teacher}+' - Room: '+${enroll.course.room}+ '   Fee: ' 
+													+${enroll.course.fee}+ ' €  '
+												+${#dates.format(enroll.course.initDate, 'dd-MM-yyyy')}+' - '+${#dates.format(enroll.course.finishDate, 'dd-MM-yyyy')}+ ' ' 
+												+ ${enroll.course.calendarCourse}"></span><br>
+
+												<span style="font-weight: bold"
+													th:text="${'id certificate: IFCT-'+ enroll.course.certificate.id}"></span><br>
+												<span
+													th:text="${enroll.course.certificate.name} +'  (author reference: ' +${enroll.course.certificate.author} +')  ' 
+													+${enroll.course.certificate.hours} + ' hours'"></span>
+												<br> <br> <a
+													th:href="@{course/updateEmployeeCourse(id=${enroll.id})}"
+													class="w3-button w3-small w3-blue w3-left">Update
+													Status Course</a>
+
+											</div></li>
+									</ul>
+								</div>
+								<br> 
+								<hr>
+							</div>
+
+							<div class="w3-center">
+								<a th:href="@{course/addCourse(id=${employee.id})}"
+									class="w3-button w3-small w3-indigo">+ Add Course</a>
+								<hr>
+							</div>
+						</div>
+						<!-- End  Courses -->
+
+						<!-- Expenses -->
+						<div id="Expenses" class="w3-container itememployee"
+							style="display: none">
+
+							<div th:if="${expensefromController.isEmpty()}">
+								<p>There is no expenses added to this employee</p>
+							</div>
+							<div th:if="${!expensefromController.isEmpty()}">
+								<p>There are some expenses from this employee in our DB</p>
+								<div th:if="${message}"
+									class="w3-panel w3-pale-red w3-center w3-display-container">
+
+									<span onclick="this.parentElement.style.display='none'"
+										class="w3-button w3-pale-red w3-large w3-display-topright">x</span>
+									<p th:text="${message}"></p>
+								</div>
+
+								<!-- Expenses from Controller for THIS id employee -->
+								<div class="w3-container"
+									th:each="expense:${expensefromController}">
+
+									<ul id="expensesUL" class="w3-ul w3-card-4">
+										<li class="w3-bar"><span
+											onclick="this.parentElement.style.display='none'"
+											class="w3-bar-item w3-button w3-small w3-right">×</span> <img
+											src="http://localhost:8086/getEmployeeImage/?id=60f7cef7579562673d1eb423"
+											class="w3-bar-item w3-circle w3-hide-small"
+											style="width: 105px">
+											<div class="w3-bar-item">
+
+												<span class="w3-large"
+													th:text="${'id expense EXPE-E-'+ expense.id}"></span><br>
+
+												<span style="color: blue" th:text="${expense.name}"></span>
+												<span
+													th:text="${' Expense date: '+ #dates.format(expense.date,'dd-MM-YYYY')}"></span>
+												<br> <span style="font-weight: bold"
+													th:text="${' value: '+ expense.value + ' €'}"></span><br>
+												<br> <a
+													th:href="@{~/employee/items/expense/deleteExpense(id=${expense.id})}"
+													class="w3-button w3-small w3-red w3-left">Delete
+													Expense</a> <a
+													th:href="@{~/employee/items/expense/updateExpense(id=${expense.id})}"
+													class="w3-button w3-small w3-blue w3-left">Update
+													Expense</a>
+
+
+											</div></li>
+									</ul>
+
+
+								</div>
+								<br>
+								<hr>
+								<div class="w3-center">
+									<a th:href="@{expense/addExpense(id=${employee.id})}"
+										class="w3-button w3-small w3-indigo">+ Add Expense</a>
+									<hr>
+								</div>
+							</div>
+
+						</div>
+						<!--End Expenses -->
+
+						<!-- Holidays -->
+						<div id="Holidays" class="w3-container itememployee"
+							style="display: none">
+
+
+							<div th:if="${holidaysfromController.isEmpty()}">
+								<p>There is no holidays added to this employee</p>
+							</div>
+							<div th:if="${!holidaysfromController.isEmpty()}">
+								<p>There are some holidays from this employee in our DB</p>
+								<div th:if="${message}"
+									class="w3-panel w3-pale-green w3-center w3-display-container">
+
+									<span onclick="this.parentElement.style.display='none'"
+										class="w3-button w3-pale-green w3-large w3-display-topright">x</span>
+									<p th:text="${message}"></p>
+								</div>
+
+								<!-- Expenses from Controller for THIS id employee -->
+								<div class="w3-container"
+									th:each="holidays:${holidaysfromController}">
+
+									<ul id="expensesUL" class="w3-ul w3-card-4">
+										<li class="w3-bar"><span
+											onclick="this.parentElement.style.display='none'"
+											class="w3-bar-item w3-button w3-small w3-right">×</span> <img
+											src="http://localhost:8086/getEmployeeImage/?id=60f83f7de4151970b36de0c3"
+											class="w3-bar-item w3-circle w3-hide-small"
+											style="width: 105px">
+											<div class="w3-bar-item">
+
+												<span class="w3-large"
+													th:text="${'Year: '+ holidays.year + ' (id: ' + holidays.id + ')'}"></span><br>
+
+												<span style="color: blue"
+													th:text="${'Holidays done: ' + holidays.daysHolidaysQty}"></span><br>
+
+												<span
+													th:text="${'Total holidays in '+ holidays.year +  ' maximun: '}"></span>
+												<span style="font-weight: bold"
+													th:text="${holidays.officialYearHolidaysQty}"></span> <br>
+												<span
+													th:with="result=${holidays.officialYearHolidaysQty - holidays.daysHolidaysQty}">
+													<span style="color: red"
+													th:text="${'Holidays left: ' + result}"></span>
+												</span> <span class="w3-panel w3-ligth-blue"
+													th:text="${ 'Holidays dates:'}"></span> <span
+													th:each="hol:${holidays.daysHolidays}"
+													th:text=" '(' + ${holStat.count} + ') ' 
+												+${#dates.format(hol,'dd-MMM')} + '  ' ">
+
+												</span><br>
+												<br>
+												<!-- <span onclick="toggleShowHide()"
+													class="w3-bar-item w3-button w3-small w3-left">+</span> <span
+													id="Dates" class="w3-hide"
+													th:text="${ 'Holidays dates: ' + holidays.daysHolidays}"></span><br> -->
+
+												<a th:href="@{holidays/deleteHolidays(id=${holidays.id})}"
+													class="w3-button w3-small w3-red">Delete Holidays Dates</a>
+												<a th:href="@{holidays/addHolidays(id=${holidays.id})}"
+													class="w3-button w3-small w3-blue">+ Add Holidays Date</a>
+											</div></li>
+									</ul>
+								</div><br>
+								<hr>
+								<div class="w3-center">
+									<a th:href="@{holidays/addHolidaysYear(id=${employee.id})}"
+										class="w3-button w3-small w3-indigo">+ Add Holidays Year</a>
+									<hr>
+								</div>
+								
+								 
+							</div>
+
+						</div>
+						<!-- End  Holidays -->
+
+
+					</div>
+					<!-- End Employee Items  -->
+				</div>
+				<!-- End Right Column 3 Tabs: Course, Expense and Holidays-->
+			</div>
+			<!-- End The Grid -->
+		</div>
+		<!-- End Main div -->
+	</div>
+	<!-- End Fragment -->
+</body>
+
+</html>
