@@ -76,8 +76,8 @@ ul li.checked::before {
 										<p>Pending update Holidays and Expenses</p>
 										<p></p>
 										<hr>
-										<img
-											src="http://localhost:8086/getEmployeeImage/?id=60f7cb2d579562673d1eb417"
+										<img 
+											th:src="@{~/getEmployeeImage/?id=60f7cb2d579562673d1eb417}"
 											alt="Avatar" class="w3-left w3-circle w3-margin-right"
 											style="width: 60px">
 										<p th:text="${employee.job}"></p>
@@ -131,7 +131,7 @@ ul li.checked::before {
 								<div class="w3-container">
 									<ul id="coursesUL" class="w3-ul w3-card-4">
 										<li class="w3-bar"><img
-											src="http://localhost:8086/getEmployeeImage/?id=60f7cc2b579562673d1eb422"
+											th:src="@{~/getEmployeeImage/?id=60f7cc2b579562673d1eb422}"
 											class="w3-bar-item w3-circle w3-hide-small"
 											style="width: 105px">
 											<div class="w3-bar-item">
