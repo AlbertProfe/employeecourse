@@ -1,4 +1,4 @@
-Welcome to the employeeCourse wiki!
+Welcome to the employeeCourseHeroku wiki!
 
 # employeeCourse repository
 JPA @Entity Employee and Images uploading/downloading
