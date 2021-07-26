@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{home/layout}">
+	layout:decorate="~{home/layout_detail}">
 <head>
 <title>Welcome to my Spring Boot Project</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,161 +10,65 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
 
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-	background: #f9f9f9;
-}
-
-/* Darker background-color on hover */
-ul li:hover {
-	background: #ddd;
-}
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-	background: #888;
-	color: #fff;
-	text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-	content: '';
-	position: absolute;
-	border-color: #fff;
-	border-style: solid;
-	border-width: 0 2px 2px 0;
-	top: 10px;
-	left: 16px;
-	transform: rotate(45deg);
-	height: 15px;
-	width: 7px;
-}
-</style>
 </head>
 
 <body>
 	<!-- Fragment-->
-	<div layout:fragment="content">
-		<!-- Script for upload image -->
+	<div layout:fragment="detail">
 
-		<!-- <!-- Page Container -->
-		<div class="w3-container w3-content"
-			th:each="employee:${employeefromController}"
-			style="max-width: 1600px; margin-top: 50px">
+		<!-- Form -->
+		<form action="insertEmployeeImage" id="uploadimageform" method="POST"
+			enctype="multipart/form-data">
 
-			<!-- Form -->
-			<form action="insertEmployeeImage" id="uploadimageform" method="POST"
-				enctype="multipart/form-data">
+			<!-- Right Column Image to Employee -->
+			<div class="w3-col m8">
+				<!-- Image to Employee by Id  -->
+				<div class="w3-card-4">
+					<header class="w3-container w3-light-grey">
+						<h3>+ Add Image</h3>
 
-				<!-- The Grid -->
-				<div class="w3-row">
+					</header>
+					<div class="w3-container">
+						<p>Upload image</p>
+						<p></p>
+						<hr>
 
-					<!-- Left Column Employee Detail-->
-					<!-- Left Column Employee Detail-->
-					<div class="w3-col m4">
-						<div class="w3-row-padding">
-							<div class="w3-col m12">
-								<!-- Course -->
-								<div class="w3-card-4">
-									<header class="w3-container w3-light-grey">
-										<h3
-											th:text="${employee.id} + ' ' +${employee.name} + ' ' + ${employee.surname}"></h3>
+						<div class="w3-container">
+							<p>
+								<label class="w3-text-gray"><b>employee id</b></label> <input
+									class="w3-input w3-border w3-light-grey" type="number"
+									name="employeeId" th:value="${employee.id}" readonly>
+							</p>
+							<p>
+								<label class="w3-text-gray"><b>Name</b></label> <input
+									class="w3-input w3-border w3-light-grey" name="name"
+									placeholder="jhon" type="text" required>
+							</p>
 
-									</header>
-									<div class="w3-container">
-										<p>Pending update Holidays and Expenses</p>
-										<p></p>
-										<hr>
-										<img
-											th:src="@{~/getEmployeeImage/?id=60f7cb2d579562673d1eb417}"
-											alt="Avatar" class="w3-left w3-circle w3-margin-right"
-											style="width: 60px">
-										<p th:text="${employee.job}"></p>
-										<p th:text="${employee.position}"></p>
-										<br>
-										<p th:text="${employee.address}"></p>
-										<p th:text="${employee.phoneNumber}"></p>
-										<p th:text="${employee.age}"></p>
-										<p th:text="${employee.email}"></p>
-
-										<p th:text="${employee.monthSalary}"></p>
-										<p th:text="${employee.password}"></p>
-										<hr>
-										<div class="w3-container w3-center">
-
-											<a th:href="@{~/employee/deleteEmployee(id=${employee.id})}"
-												class="w3-button w3-red w3-center">Delete</a> <a
-												th:href="@{~/employee/updateEmployee(id=${employee.id})}"
-												class="w3-button w3-blue">Update</a> 
+							<p>
+								<input class="w3-button w3-light-grey" type="file"
+									id="uploadImage" name="file">
+							</p>
 
 
-											<hr>
-										</div>
+							<button type="submit" class="w3-button w3-blue-grey">Upload
+								Image</button>
 
-									</div>
-									<a class="w3-button w3-block w3-dark-grey"
-										th:href="@{~/employee/items/detailEmployee(id=${employee.id})}">
-										Detail Employee</a>
-								</div>
+							<hr>
+							<div th:if="${message}">
+								<p th:text="${message}"></p>
 							</div>
+
 						</div>
-					</div>
-					<!-- End Left Column -->
-
-
-					<!-- Right Column Course to Employee -->
-					<div class="w3-col m8">
-						<!-- Select Course to Employee by Id  -->
-						<div class="w3-card-4">
-							<header class="w3-container w3-light-grey">
-								<h3>+ Add Image</h3>
-
-							</header>
-							<div class="w3-container">
-								<p>Upload image</p>
-								<p></p>
-								<hr>
-
-								<div class="w3-container">
-									<p>
-										<label class="w3-text-gray"><b>employee id</b></label> <input
-										class="w3-input w3-border w3-light-grey" 
-											type="number" name="employeeId" th:value="${employee.id}"
-											readonly>
-									</p>
-									<p>
-										<label class="w3-text-gray"><b>Name</b></label> <input
-											class="w3-input w3-border w3-light-grey" name="name"
-											placeholder="jhon" type="text" required>
-									</p>
-
-									<p>
-										<input class="w3-button w3-light-grey" type="file"
-											id="uploadImage" name="file">
-									</p>
-
-
-									<button type="submit" class="w3-button w3-blue-grey">Upload
-										Image</button>
-
-									<hr>
-									<div th:if="${message}">
-										<p th:text="${message}"></p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<!-- End Right Column -->
 					</div>
 				</div>
-				<!-- End Grid -->
-			</form>
-		</div>
-		<!-- End Page Container -->
-		<br> <br> <br>
+			</div>
+			<!-- End Right Column -->
+		
+		</form>
+		<!-- End Form -->
+	
 	</div>
 	<!-- End Fragment-->
 

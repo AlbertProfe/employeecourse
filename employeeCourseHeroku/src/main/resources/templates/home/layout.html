@@ -6,8 +6,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-
 <head>
 <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
 <style>
@@ -92,14 +90,12 @@ body {
 			th:href="@{/employee/newEmployee}">Add new employee</a> <a
 			th:href="@{/expense/allExpenses}">All expenses</a> <a
 			th:href="@{/expense/newExpense}">Add new expense</a> <a
-			th:href="@{/course/allCourses}">Filter Courses</a>
-			<a th:href="@{/enrollment/allEnrollments}">+ Enrollments</a>
-			<a th:href="@{/fillin}">Fill in</a> <a
+			th:href="@{/course/allCourses}">Filter Courses</a> <a
+			th:href="@{/enrollment/allEnrollments}">+ Enrollments</a> <a
+			th:href="@{/fillin}">Fill in</a> <a
 			onclick="document.getElementById('id02').style.display='block'"
-			class="w3-bar-item w3-button w3-mobile w3-right">Session</a>
-			 <a
-			href="javascript:void(0);" class="icon" onclick="myFunction()"> 
-			<i
+			class="w3-bar-item w3-button w3-mobile w3-right">Session</a> <a
+			href="javascript:void(0);" class="icon" onclick="myFunction()"> <i
 			class="fa fa-bars"></i></a>
 	</div>
 
@@ -114,7 +110,6 @@ body {
 		}
 	</script>
 
-
 	<!-- Session info -->
 	<div id="id02" class="w3-modal">
 		<div class="w3-modal-content">
@@ -128,16 +123,12 @@ body {
 		</div>
 	</div>
 
-
-
 	<!-- Content Section -->
-	<section layout:fragment="content">
-		<p>This is filled by the content template.</p>
-	</section>
-	
+	<section layout:fragment="content"></section>
+
 	<!-- Optional Section -->
 	<th:block layout:fragment="optional" />
-	
+
 	<br>
 	<br>
 	<br>
@@ -149,8 +140,6 @@ body {
 		</div>
 	</footer>
 
-	
+
 </body>
-
-
 </html>
