@@ -210,7 +210,7 @@ public class HomeController {
 	}
 
 	// -------------------------- error path website ----------------------------
-	@RequestMapping({ "*", "*/*", "*/*/*" })
+	@RequestMapping({ "*", "*/*", "*/*/*", "course/*", "enrollment/*" })
 	public String notFound(Model model) {
 
 		String pattern = "yyyy-MM-dd HH:mm:ssZ";
