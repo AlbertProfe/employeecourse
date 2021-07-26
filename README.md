@@ -44,10 +44,10 @@ screenshoots from app: https://github.com/AlbertProfe/images/tree/main/cifosprin
   - CommandLineRunner
        - HomeController Fill in entities in H2 and assign them
        - Employee @entity
-         - `setEmployeeImageId` with `employeeImageId` string id from mongodb with *to-do*
+         - `setEmployeeImageId` with `employeeImageId` string id from mongodb **to-do**
   - Employee (Items detail)
       - Empployee Detail
-        - Path (th:scr) to mognodb image from `getEmployeeImageId`  via rest controller *to-do*
+        - Path (th:scr) to mognodb image from `getEmployeeImageId`  via rest controller **to-do**
       - Courses
         - Add couse to employee (insert date and status *to-do*)
         - Update status
@@ -64,11 +64,11 @@ screenshoots from app: https://github.com/AlbertProfe/images/tree/main/cifosprin
       - Add Image:
         - upload image option (EmployeImage to mongoDB)
         -  `1:1 - bidirectional`  (EmployeImage <> Employee)
-  - Enrollments *to-do*
-  - Courses and filters *to-do*
-  - Thymeleaf pagination *to-do*
-  - Thymeleaf validation *to-do*
-  - Abstract class and inhrence with audit and DTO *to-do*
+  - Enrollments **to-do**
+  - Courses and filters **to-do**
+  - Thymeleaf pagination **to-do**
+  - Thymeleaf validation **to-do**
+  - Abstract class and inhrence with audit and DTO **to-do**
   - Java 8 and H2 in memory to `DEPLOY: upload to Heroku`
 
 `How layout works:`
