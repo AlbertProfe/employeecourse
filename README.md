@@ -22,9 +22,6 @@ Deployed on `Heroku`: https://employeecourse.herokuapp.com/
 
 screenshoots from app: https://github.com/AlbertProfe/images/tree/main/cifospring2021/mockup
 
-`How layout works:`
-
-<a href="https://github.com/AlbertProfe/images/blob/main/cifospring2021/layout/layout_0.png"><img src="https://github.com/AlbertProfe/images/blob/main/cifospring2021/layout/layout_0.png" width="500"></a>
 
 `Employee JPA relationships:`
 
@@ -36,6 +33,7 @@ screenshoots from app: https://github.com/AlbertProfe/images/tree/main/cifosprin
    - Layout and fragment
       - layout.html
       - layout_login.html
+      - layout_detail.html
    - Java classes JPA
       - n:m TA as two @Entity and `1:n` `n:1` `1:n`
       - Employee <> Expense (@Entity H2) `1:n` bidirectional
@@ -72,3 +70,7 @@ screenshoots from app: https://github.com/AlbertProfe/images/tree/main/cifosprin
   - Thymeleaf validation *to-do*
   - Abstract class and inhrence with audit and DTO *to-do*
   - Java 8 and H2 in memory to `DEPLOY: upload to Heroku`
+
+`How layout works:`
+
+<a href="https://github.com/AlbertProfe/images/blob/main/cifospring2021/layout/layout_0.png"><img src="https://github.com/AlbertProfe/images/blob/main/cifospring2021/layout/layout_0.png" width="500"></a>
